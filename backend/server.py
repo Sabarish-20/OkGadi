@@ -185,12 +185,18 @@ app = FastAPI(lifespan=lifespan)
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins
     allow_credentials=True,
-    allow_origins=["*"], # Allow all origins for development
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Database Connection
+MONGO_URL = os.getenv("MONGO_URL", "mongodb://localhost:27017")
+# client = AsyncIOMotorClient(MONGO_URL)
+# app.db = client.okgaadi
+
+# Mock DB for development/demo (Using mongomock)
 # Include Routers
 app.include_router(auth.router, prefix="/api")
 app.include_router(vehicles.router, prefix="/api")

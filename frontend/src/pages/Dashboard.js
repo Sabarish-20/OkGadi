@@ -23,9 +23,9 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [vehiclesRes, tripsRes, alertsRes] = await Promise.all([
-          axios.get('http://localhost:8000/api/vehicles/'),
-          axios.get('http://localhost:8000/api/trips/'),
-          axios.get('http://localhost:8000/api/alerts/')
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/vehicles/`),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/trips/`),
+          axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/alerts/`)
         ]);
 
         setVehicles(vehiclesRes.data);

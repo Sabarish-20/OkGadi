@@ -40,7 +40,7 @@ const Vehicles = () => {
 
   const fetchVehicles = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/vehicles/');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/vehicles/`);
       setVehicles(response.data);
     } catch (error) {
       console.error("Error fetching vehicles:", error);
@@ -160,8 +160,8 @@ const Vehicles = () => {
               <div className="flex items-start justify-between">
                 <div className="flex items-center space-x-3">
                   <div className={`p-3 rounded-xl ${vehicle.status === 'active' ? 'bg-gradient-to-br from-blue-500 to-teal-500' :
-                      vehicle.status === 'maintenance' ? 'bg-gradient-to-br from-orange-500 to-red-500' :
-                        'bg-gray-500'
+                    vehicle.status === 'maintenance' ? 'bg-gradient-to-br from-orange-500 to-red-500' :
+                      'bg-gray-500'
                     }`}>
                     <Truck className="h-6 w-6 text-white" />
                   </div>

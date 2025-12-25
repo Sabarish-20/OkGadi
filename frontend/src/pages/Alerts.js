@@ -26,7 +26,7 @@ const Alerts = () => {
 
   const fetchAlerts = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/alerts/');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/alerts/`);
       setAlerts(response.data);
     } catch (error) {
       console.error("Error fetching alerts:", error);
@@ -48,7 +48,7 @@ const Alerts = () => {
 
   const markAsRead = async (alertId) => {
     try {
-      await axios.put(`http://localhost:8000/api/alerts/${alertId}/read`);
+      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/alerts/${alertId}/read`);
       setAlerts(alerts.map(alert =>
         alert.id === alertId ? { ...alert, read: true } : alert
       ));
@@ -67,7 +67,7 @@ const Alerts = () => {
     const unreadAlerts = alerts.filter(a => !a.read);
     try {
       await Promise.all(unreadAlerts.map(alert =>
-        axios.put(`http://localhost:8000/api/alerts/${alert.id}/read`)
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/api/alerts/${alert.id}/read`)
       ));
       setAlerts(alerts.map(alert => ({ ...alert, read: true })));
       toast({
@@ -86,7 +86,7 @@ const Alerts = () => {
 
   const deleteAlert = async (alertId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/alerts/${alertId}`);
+      await axios.delete(`${process.env.REACT_APP_BACKEND_URL}/api/alerts/${alertId}`);
       setAlerts(alerts.filter(alert => alert.id !== alertId));
       toast({
         title: 'Alert Deleted',

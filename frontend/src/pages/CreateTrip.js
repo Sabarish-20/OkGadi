@@ -47,7 +47,7 @@ const CreateTrip = () => {
 
   const fetchVehicles = async () => {
     try {
-      const response = await axios.get('http://localhost:8000/api/vehicles/');
+      const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/api/vehicles/`);
       setVehicles(response.data);
     } catch (error) {
       console.error("Error fetching vehicles:", error);
@@ -214,7 +214,7 @@ const CreateTrip = () => {
         progress: 0
       };
 
-      await axios.post('http://localhost:8000/api/trips/', tripData);
+      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/trips/`, tripData);
 
       toast({
         title: 'Trip Created',
